@@ -34,7 +34,7 @@ public class Arrow : MonoBehaviour {
 
         RaycastHit[] hits;
 
-        hits = Physics.SphereCastAll(transform.position, hitRadius, transform.forward, 0f, grabMask);
+        /*hits = Physics.SphereCastAll(transform.position, hitRadius, transform.forward, 0f, grabMask);
 
         if (hits.Length > 0)
         {
@@ -51,15 +51,12 @@ public class Arrow : MonoBehaviour {
 
             hit = true;
 
-       
-
-            
 
             //grabbedObject.GetComponent<Rigidbody>().velocity = OVRInput.GetLocalControllerVelocity(controller);
 
-            gameObject.transform.position = hitObj.transform.position;
+            //gameObject.transform.position = hitObj.transform.position;
             gameObject.transform.parent = hitObj.transform;
-        }
+        }*/
 
 
     }
@@ -67,5 +64,17 @@ public class Arrow : MonoBehaviour {
     void AttachArrow()
     {
         //ArrowManager.Instance.AttachBowToArrow();
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        Debug.Log("asd");
+
+        gameObject.GetComponent<Rigidbody>().useGravity = false;
+        gameObject.GetComponent<Rigidbody>().isKinematic = true;
+
+        hit = true;
+        hitObj = collider.gameObject;
+        gameObject.transform.parent = hitObj.transform;
     }
 }

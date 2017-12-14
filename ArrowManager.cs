@@ -70,11 +70,6 @@ public class ArrowManager : MonoBehaviour {
             dist = (tracked_object.transform.position - stringStartPoint.transform.position).magnitude;
             stringAttachPoint.transform.localPosition = stringStartPoint.transform.localPosition + new Vector3(8*dist, 0f, 0f);
         }
-
-        /*if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) == 0) {
-
-            ReleaseString(dist);
-        }*/
     }
 
     public void ReleaseString(float magnitude) {
@@ -91,28 +86,4 @@ public class ArrowManager : MonoBehaviour {
 
         stringAttachPoint.transform.localPosition = stringStartPoint.transform.localPosition;
     }
-
-    /*
-    private void attachArrow()
-    {
-        if(currentArrow == null)
-        {
-            currentArrow = Instantiate(arrowPrefab);
-
-            currentArrow.transform.position = tracked_object.transform.position;
-            currentArrow.transform.parent = tracked_object.transform;
-            currentArrow.transform.localPosition = new Vector3(0f, 0f, 2.31f); //local position is what we see in the transform -> offset from whereever controller is
-
-        }
-    }
-    
-
-    public void AttachBowToArrow()
-    {
-        currentArrow.transform.parent = stringAttachPoint.transform;
-        currentArrow.transform.localPosition = arrowStartPosition.transform.localPosition;
-        currentArrow.transform.localRotation = arrowStartPosition.transform.localRotation;
-        isAttached = true;
-    }
-    */
 }

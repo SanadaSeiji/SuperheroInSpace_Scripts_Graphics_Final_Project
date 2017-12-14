@@ -50,7 +50,7 @@ public class flying : MonoBehaviour {
         Vector3 rightDir = oculusRightHand.transform.position - oculusRightEye.transform.position;
         Vector3 dir = leftDir + rightDir;
         if (dir.y > 0)
-            armAclr = dir.y;
+            armAclr = dir.y * 0.05f;
         else armAclr = 0f;
 
         acclr = Mathf.Max(OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger), OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger))/2;
