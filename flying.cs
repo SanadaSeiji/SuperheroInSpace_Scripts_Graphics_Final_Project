@@ -61,6 +61,15 @@ public class flying : MonoBehaviour {
 
         rr.velocity = oculusLeftEye.transform.forward * forwardSpeed * (acclr + armAclr);//dir.z as weight on forwardSpeed
                                                                                          //rr.velocity = oculusLeftEye.transform.forward * forwardSpeed * dir.z;
+    }
+
+    void stopFlight()
+    {
+        rr.velocity = Vector3.Lerp(rr.velocity, Vector3.zero, 20); 
+    }
+
+    void DetectTerrainCollision() {
+
         //always casting ray
         RaycastHit[] hits;
 
@@ -69,9 +78,7 @@ public class flying : MonoBehaviour {
         if (hits.Length > 0)
         {
             Debug.Log(hitOccured);
-            //Debug.Log("Collision detected");
 
-            hitTime = Time.time;
             hitOccured = true;
 
             Debug.Log(hitOccured);
@@ -85,14 +92,6 @@ public class flying : MonoBehaviour {
 
     }
 
-    
-
-    void stopFlight()
-    {
-        rr.velocity = new Vector3(0, 0, 0);
-    }
-
-
     // Use this for initialization
     void Start () {
         rr = GetComponent<Rigidbody>();
@@ -102,17 +101,24 @@ public class flying : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        //Debug.Log(hitOccured);
+        float primaryIndexPressure = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger);
+        float secondaryIndexPressure = OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger);
 
-        if (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > .1 && OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > .1 && hitOccured == false)
-             //always pressing when flying....
+        if (primaryIndexPressure > .1 && secondaryIndexPressure > .1 && !hitOccured)
+        {
+            //always pressing when flying....
             FlightMode();
+        }
         else //when not pressing, stop
+        {
             stopFlight();
+        }
 
-        if (Time.time - hitTime > 5 && hitOccured == true)
+        if (primaryIndexPressure == 0 && secondaryIndexPressure == 0 && hitOccured)
+        {
             hitOccured = false;
-       
-        
+        }
+
+        DetectTerrainCollision();
     }
 }

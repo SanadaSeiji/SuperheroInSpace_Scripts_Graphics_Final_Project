@@ -79,13 +79,15 @@ public class ArrowManager : MonoBehaviour {
 
     public void ReleaseString(float magnitude) {
 
-   
+        
         //currentArrow = Instantiate(arrowPrefab_bow, gameObject.transform);
         currentArrow.AddComponent<Rigidbody>();
         currentArrow.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
         Rigidbody r = currentArrow.GetComponent<Rigidbody>();
         r.velocity = currentArrow.transform.forward * 30f * magnitude;
         r.useGravity = true;
+
+        currentArrow.transform.parent = null;
 
         stringAttachPoint.transform.localPosition = stringStartPoint.transform.localPosition;
     }
