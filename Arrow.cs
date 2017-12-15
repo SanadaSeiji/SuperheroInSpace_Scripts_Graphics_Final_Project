@@ -34,14 +34,18 @@ public class Arrow : MonoBehaviour {
 
     private void OnTriggerEnter(Collider collider)
     {
-        Debug.Log("asd");
-        if (GetComponent<Rigidbody>())
+        if (!collider.gameObject.GetComponent<Arrow>())
         {
-            gameObject.GetComponent<Rigidbody>().useGravity = false;
-            gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            
+            Debug.Log("asd");
+            if (GetComponent<Rigidbody>())
+            {
+                gameObject.GetComponent<Rigidbody>().useGravity = false;
+                gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            }
+            hit = true;
+            hitObj = collider.gameObject;
+            gameObject.transform.parent = hitObj.transform;
         }
-        hit = true;
-        hitObj = collider.gameObject;
-        gameObject.transform.parent = hitObj.transform;
     }
 }
