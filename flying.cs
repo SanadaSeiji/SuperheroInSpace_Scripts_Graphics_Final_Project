@@ -31,7 +31,7 @@ public class flying : MonoBehaviour {
     private bool isMoving = false;
     private bool isFlying = false;
 
-    AudioSource[] sounds;
+    AudioSource warpSound;
 
     void FlightMode()
     {
@@ -101,9 +101,10 @@ public class flying : MonoBehaviour {
 
             GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
             //if collide in terrain, gameover
-            //tranport to reg dragon
+            //tranport to red dragon
+            warpSound.Play();
             transform.position = startObj.transform.position;
-
+            
         }
 
     }
@@ -111,7 +112,7 @@ public class flying : MonoBehaviour {
     // Use this for initialization
     void Start () {
         rr = GetComponent<Rigidbody>();
-        sounds = GetComponents<AudioSource>();
+        warpSound = GetComponent<AudioSource>();
 
 
     }
@@ -130,9 +131,9 @@ public class flying : MonoBehaviour {
             }
             else if (isFlying == true)
             {
-                Debug.Log("inside isFlying");
+                //Debug.Log("inside isFlying");
                 isMoving = true;
-                Debug.Log(rr.velocity);
+                //Debug.Log(rr.velocity);
                 isFlying = false;
                 // stopFlight();
             }
