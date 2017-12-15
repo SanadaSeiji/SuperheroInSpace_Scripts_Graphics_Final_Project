@@ -68,7 +68,7 @@ public class ArrowManager : MonoBehaviour {
         if (isAttached)
         {
             dist = (tracked_object.transform.position - stringStartPoint.transform.position).magnitude;
-            stringAttachPoint.transform.localPosition = stringStartPoint.transform.localPosition + new Vector3(8*dist, 0f, 0f);
+            stringAttachPoint.transform.localPosition = stringStartPoint.transform.localPosition + new Vector3(1*dist, 0f, 0f);
         }
     }
 

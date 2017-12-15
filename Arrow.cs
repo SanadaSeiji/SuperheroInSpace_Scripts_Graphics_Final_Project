@@ -21,7 +21,7 @@ public class Arrow : MonoBehaviour {
 	void Update () {
 
         if (gameObject.GetComponent<Rigidbody>() && hit == false) {
-            gameObject.transform.RotateAround(transform.position, -Vector3.up,Time.deltaTime*100);
+            //gameObject.transform.RotateAround(transform.position, -Vector3.up,Time.deltaTime*100);
             gameObject.transform.rotation = Quaternion.LookRotation(gameObject.GetComponent<Rigidbody>().velocity);
 
         }

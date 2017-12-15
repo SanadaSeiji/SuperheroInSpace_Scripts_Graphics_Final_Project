@@ -33,9 +33,9 @@ public class Grab : MonoBehaviour {
             }
             grabbedObject = hits[closestHit].transform.gameObject;
             grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
-            //grabbedObject.GetComponent<Rigidbody>().velocity = OVRInput.GetLocalControllerVelocity(controller);
+            
            
-            //grabbedObject.transform.position = transform.position;
+            //grabbedObject.transform.position = transform.position; //if this is on, always grab the same position
             grabbedObject.transform.parent = transform;
         }
     }
@@ -49,8 +49,8 @@ public class Grab : MonoBehaviour {
             grabbedObject.transform.parent = null;
             grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
             grabbedObject.GetComponent<Rigidbody>().velocity = OVRInput.GetLocalControllerVelocity(controller);
-            grabbedObject.GetComponent<Rigidbody>().velocity += new Vector3(100f, 100f, 100f);
-            grabbedObject.GetComponent<Rigidbody>().angularVelocity = GetAngularVelocity();
+            grabbedObject.GetComponent<Rigidbody>().velocity += new Vector3(100f, 100f, 100f); //upscale thrown-obj's velocity
+            grabbedObject.GetComponent<Rigidbody>().angularVelocity = GetAngularVelocity(); //thrown obj's rotation
 
             Debug.Log(OVRInput.GetLocalControllerVelocity(controller));
 
@@ -60,7 +60,7 @@ public class Grab : MonoBehaviour {
 
     Vector3 GetAngularVelocity()
     {
-        Quaternion deltaRotation = currentRotation * Quaternion.Inverse(lastRotation);
+        Quaternion deltaRotation = currentRotation * Quaternion.Inverse(lastRotation); //matrix-change: changed angle
         return new Vector3(Mathf.DeltaAngle(0, deltaRotation.eulerAngles.x), Mathf.DeltaAngle(0, deltaRotation.eulerAngles.y), Mathf.DeltaAngle(0, deltaRotation.eulerAngles.z));
     }
 

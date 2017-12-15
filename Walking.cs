@@ -6,7 +6,7 @@ public class Walking : MonoBehaviour {
 
     public GameObject oculusLeftEye;
 
-    public float forwardSpeed = 1f;
+    public float forwardSpeed = 5f;
     float rotationSpeed = 5f;
 
     Vector3 axis;

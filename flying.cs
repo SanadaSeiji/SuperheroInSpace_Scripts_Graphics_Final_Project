@@ -34,7 +34,7 @@ public class flying : MonoBehaviour {
         rr.useGravity = false;
         //get rotation values for the LeftEye
         rotationX = oculusLeftEye.transform.localRotation.x / 2;
-        rotationY = oculusLeftEye.transform.localRotation.y * 2;
+        rotationY = oculusLeftEye.transform.localRotation.y * 2; //make fly up/up easier
         rotationZ = oculusLeftEye.transform.localRotation.z;
 
         //put them into a vector
@@ -111,6 +111,7 @@ public class flying : MonoBehaviour {
             stopFlight();
         }
 
+        //after died, when released index triggers, could fly again, otherwise stay still
         if (primaryIndexPressure == 0 && secondaryIndexPressure == 0 && hitOccured)
         {
             hitOccured = false;
