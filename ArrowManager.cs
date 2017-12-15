@@ -79,7 +79,7 @@ public class ArrowManager : MonoBehaviour {
         currentArrow.AddComponent<Rigidbody>();
         currentArrow.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
         Rigidbody r = currentArrow.GetComponent<Rigidbody>();
-        r.velocity = currentArrow.transform.forward * 30f * magnitude;
+        r.velocity = currentArrow.transform.forward * 50f * magnitude;
         r.useGravity = true;
 
         currentArrow.transform.parent = null;

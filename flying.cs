@@ -31,6 +31,8 @@ public class flying : MonoBehaviour {
     private bool isMoving = false;
     private bool isFlying = false;
 
+    AudioSource[] sounds;
+
     void FlightMode()
     {
         rr.useGravity = false;
@@ -65,18 +67,18 @@ public class flying : MonoBehaviour {
 
     void stopFlight()
     {
-        Debug.Log("inside stop flight");
+       // Debug.Log("inside stop flight");
         if (isMoving == true)
         {
-            Debug.Log("inside isMoving");
-            Debug.Log(rr.velocity);
+           // Debug.Log("inside isMoving");
+           // Debug.Log(rr.velocity);
             Vector3 currentVel = rr.velocity;
             rr.velocity = Vector3.Lerp(rr.velocity, Vector3.zero, .015f);
-            Debug.Log(rr.velocity);
+           // Debug.Log(rr.velocity);
             if (rr.velocity.magnitude == 0)
             {
                 isMoving = false;
-                Debug.Log("0");
+               // Debug.Log("0");
             }
         }
     
@@ -91,11 +93,11 @@ public class flying : MonoBehaviour {
 
         if (hits.Length > 0)
         {
-            Debug.Log(hitOccured);
+           // Debug.Log(hitOccured);
 
             hitOccured = true;
 
-            Debug.Log(hitOccured);
+           // Debug.Log(hitOccured);
 
             GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
             //if collide in terrain, gameover
@@ -109,6 +111,8 @@ public class flying : MonoBehaviour {
     // Use this for initialization
     void Start () {
         rr = GetComponent<Rigidbody>();
+        sounds = GetComponents<AudioSource>();
+
 
     }
 	
@@ -138,6 +142,8 @@ public class flying : MonoBehaviour {
         {
             //always pressing when flying....
             FlightMode();
+
+
         }
         else   //when not pressing, stop
         {
