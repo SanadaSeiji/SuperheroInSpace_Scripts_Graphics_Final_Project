@@ -28,15 +28,18 @@ public class flying : MonoBehaviour {
     public float hitTime;
     private bool hitOccured = false;
 
+    private bool isMoving = false;
+    private bool isFlying = false;
 
     void FlightMode()
     {
         rr.useGravity = false;
+        isFlying = true;
         //get rotation values for the LeftEye
         rotationX = oculusLeftEye.transform.localRotation.x / 2;
         rotationY = oculusLeftEye.transform.localRotation.y * 2; //make fly up/up easier
         rotationZ = oculusLeftEye.transform.localRotation.z;
-
+        
         //put them into a vector
         axis = new Vector3(rotationX, rotationY, rotationZ);
 
@@ -62,7 +65,21 @@ public class flying : MonoBehaviour {
 
     void stopFlight()
     {
-        rr.velocity = Vector3.Lerp(rr.velocity, Vector3.zero, 20); 
+        Debug.Log("inside stop flight");
+        if (isMoving == true)
+        {
+            Debug.Log("inside isMoving");
+            Debug.Log(rr.velocity);
+            Vector3 currentVel = rr.velocity;
+            rr.velocity = Vector3.Lerp(rr.velocity, Vector3.zero, .015f);
+            Debug.Log(rr.velocity);
+            if (rr.velocity.magnitude == 0)
+            {
+                isMoving = false;
+                Debug.Log("0");
+            }
+        }
+    
     }
 
     void DetectTerrainCollision() {
@@ -101,21 +118,34 @@ public class flying : MonoBehaviour {
         float primaryIndexPressure = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger);
         float secondaryIndexPressure = OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger);
 
+        if (primaryIndexPressure == 0 && secondaryIndexPressure == 0)
+        {
+            if (hitOccured == true) //Hit the terrain
+            {
+                hitOccured = false;
+            }
+            else if (isFlying == true)
+            {
+                Debug.Log("inside isFlying");
+                isMoving = true;
+                Debug.Log(rr.velocity);
+                isFlying = false;
+                // stopFlight();
+            }
+        }
+
         if (primaryIndexPressure > .1 && secondaryIndexPressure > .1 && !hitOccured)
         {
             //always pressing when flying....
             FlightMode();
         }
-        else //when not pressing, stop
+        else   //when not pressing, stop
         {
             stopFlight();
         }
 
         //after died, when released index triggers, could fly again, otherwise stay still
-        if (primaryIndexPressure == 0 && secondaryIndexPressure == 0 && hitOccured)
-        {
-            hitOccured = false;
-        }
+
 
         DetectTerrainCollision();
     }
