@@ -14,7 +14,7 @@ public class Arrow : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        // gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+       
     }
 	
 	// Update is called once per frame

@@ -20,7 +20,7 @@ public class ArrowManager : MonoBehaviour {
 
     void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -33,13 +33,13 @@ public class ArrowManager : MonoBehaviour {
             Instance = null;
     }
 
-    void Start () {
+    void Start() {
 
         //arrowPrefab = gameObject;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update() {
 
         //attachArrow();
 
@@ -61,20 +61,20 @@ public class ArrowManager : MonoBehaviour {
             pullInProgress = false;
         }
 
-	}
+    }
 
     public void PullString()
     {
         if (isAttached)
         {
             dist = (tracked_object.transform.position - stringStartPoint.transform.position).magnitude;
-            stringAttachPoint.transform.localPosition = stringStartPoint.transform.localPosition + new Vector3(1*dist, 0f, 0f);
+            stringAttachPoint.transform.localPosition = stringStartPoint.transform.localPosition + new Vector3(1 * dist, 0f, 0f);
         }
     }
 
     public void ReleaseString(float magnitude) {
 
-        
+
         //currentArrow = Instantiate(arrowPrefab_bow, gameObject.transform);
         currentArrow.AddComponent<Rigidbody>();
         currentArrow.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
@@ -86,4 +86,5 @@ public class ArrowManager : MonoBehaviour {
 
         stringAttachPoint.transform.localPosition = stringStartPoint.transform.localPosition;
     }
+
 }
