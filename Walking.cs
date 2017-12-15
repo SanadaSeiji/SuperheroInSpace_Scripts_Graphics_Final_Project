@@ -42,28 +42,28 @@ public class Walking : MonoBehaviour {
         //!!!ouside: input- H/V wire up with oculus touch
         if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickUp) || OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp)) //left Hand
         {
-            transform.Translate(new Vector3(forwardSpeed * Time.deltaTime, 0f, 0f));
-
+            transform.Translate(new Vector3(0f, 0f, forwardSpeed * Time.deltaTime));
+           
             //transform.Position += new Vector3 (Input.getAxis("Horizontal") * forwardSpeed * Time.deltaTime, 0f, Input.getAxis("Vertical") * forwardSpeed * Time.deltaTime);
         }
 
         if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickLeft) || OVRInput.Get(OVRInput.Button.PrimaryThumbstickLeft)) //left hand
         {
-            transform.Translate(new Vector3(0f, 0f, -forwardSpeed * Time.deltaTime));
 
+            transform.Translate(new Vector3(-forwardSpeed * Time.deltaTime, 0f, 0f));
             //transform.Position += new Vector3 (Input.getAxis("Horizontal") * forwardSpeed * Time.deltaTime, 0f, Input.getAxis("Vertical") * forwardSpeed * Time.deltaTime);
         }
 
         if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickRight) || OVRInput.Get(OVRInput.Button.PrimaryThumbstickRight)) // right hand
         {
-
-            transform.Translate(new Vector3(0f, 0f, forwardSpeed * Time.deltaTime));
+            transform.Translate(new Vector3(forwardSpeed * Time.deltaTime, 0f, 0f));
         }
 
         if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickDown) || OVRInput.Get(OVRInput.Button.PrimaryThumbstickDown))
         { //right hand
 
-            transform.Translate(new Vector3(-forwardSpeed * Time.deltaTime, 0f, 0f));
+            transform.Translate(new Vector3(0f, 0f, -forwardSpeed * Time.deltaTime));
+           
         }
 
     }   

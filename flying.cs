@@ -34,7 +34,7 @@ public class flying : MonoBehaviour {
         rr.useGravity = false;
         //get rotation values for the LeftEye
         rotationX = oculusLeftEye.transform.localRotation.x / 2;
-        rotationY = oculusLeftEye.transform.localRotation.y / 2;
+        rotationY = oculusLeftEye.transform.localRotation.y * 2;
         rotationZ = oculusLeftEye.transform.localRotation.z;
 
         //put them into a vector
@@ -53,11 +53,8 @@ public class flying : MonoBehaviour {
             armAclr = dir.y * 0.05f;
         else armAclr = 0f;
 
-        acclr = Mathf.Max(OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger), OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger))/2;
-        /*if(OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger))
-            acclr = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger)/2;
-        else acclr = OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger)/2;
-        */
+        acclr = Mathf.Max(OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger), OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger)) / 2;
+
 
         rr.velocity = oculusLeftEye.transform.forward * forwardSpeed * (acclr + armAclr);//dir.z as weight on forwardSpeed
                                                                                          //rr.velocity = oculusLeftEye.transform.forward * forwardSpeed * dir.z;

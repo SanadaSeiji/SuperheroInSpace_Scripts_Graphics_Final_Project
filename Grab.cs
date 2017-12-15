@@ -49,6 +49,7 @@ public class Grab : MonoBehaviour {
             grabbedObject.transform.parent = null;
             grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
             grabbedObject.GetComponent<Rigidbody>().velocity = OVRInput.GetLocalControllerVelocity(controller);
+            grabbedObject.GetComponent<Rigidbody>().velocity += new Vector3(100f, 100f, 100f);
             grabbedObject.GetComponent<Rigidbody>().angularVelocity = GetAngularVelocity();
 
             Debug.Log(OVRInput.GetLocalControllerVelocity(controller));
